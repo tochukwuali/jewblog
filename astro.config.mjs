@@ -11,25 +11,47 @@ export default defineConfig({
 	fonts: [
 		{
 			provider: fontProviders.local(),
-			name: 'Atkinson',
-			cssVariable: '--font-atkinson',
+			name: 'GeneralSans',
+			cssVariable: '--font-general-sans',
 			fallbacks: ['sans-serif'],
 			options: {
 				variants: [
 					{
-						src: ['./src/assets/fonts/atkinson-regular.woff'],
+						src: ['./src/assets/fonts/GeneralSans-Regular.otf'],
 						weight: 400,
 						style: 'normal',
 						display: 'swap',
 					},
 					{
-						src: ['./src/assets/fonts/atkinson-bold.woff'],
-						weight: 700,
+						src: ['./src/assets/fonts/GeneralSans-Semibold.otf'],
+						weight: 500,
 						style: 'normal',
 						display: 'swap',
 					},
 				],
 			},
 		},
+		{
+			provider: fontProviders.local(),
+			name: 'Ligema',
+			cssVariable: '--font-ligema',
+			fallbacks: ['sans-serif'],
+			options: {
+				variants: [
+					{
+						src: ['./src/assets/fonts/Ligema-Regular.woff'],
+						weight: 400,
+						style: 'normal',
+						display: 'swap',
+					},
+					{
+						src: ['./src/assets/fonts/Ligema-Regular.woff2'],
+						weight: 400,
+						style: 'normal',
+						display: 'swap',
+					},
+				],
+			},
+		}
 	],
 });

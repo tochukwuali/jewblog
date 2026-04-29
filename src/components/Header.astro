@@ -1,17 +1,30 @@
 ---
-import { SITE_TITLE } from '../consts';
-import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from "../consts";
+import HeaderLink from "./HeaderLink.astro";
+import { Image } from "astro:assets";
+import logo from "../assets/jewlogo.svg"; // Adjust path if needed
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-		</div>
-		<div class="social-links">
+  <nav>
+    <a href="/"><Image src={logo} alt="Logo" class="logo" /></a>
+
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <svg class="close-icon" viewBox="0 0 24 24" width="30" height="30">
+        <path
+          d="M6.36504 7.102L0.904429 12.5706C0.807278 12.6679 0.687871 12.72 0.546209 12.7271C0.404548 12.7341 0.278121 12.6821 0.166929 12.5711C0.0557374 12.4601 9.2604e-05 12.3372 -5.38631e-06 12.2025C-0.000103377 12.0677 0.0553626 11.9448 0.166393 11.8336L5.627 6.36504L0.158444 0.904434C0.0611506 0.807283 0.00898029 0.687876 0.0019328 0.546214C-0.00511468 0.404553 0.0468768 0.278126 0.157907 0.166934C0.268937 0.0557424 0.391814 9.76526e-05 0.526536 -3.38051e-07C0.661258 -9.83287e-05 0.784215 0.0553676 0.895407 0.166398L6.36396 5.627L11.8246 0.158449C11.9217 0.0611556 12.0415 0.00898509 12.1838 0.0019371C12.3248 -0.00510988 12.4509 0.0468819 12.5621 0.157912C12.6733 0.268942 12.7289 0.391819 12.729 0.526541C12.7291 0.661263 12.6736 0.78422 12.5626 0.895412L7.102 6.36397L12.5706 11.8246C12.6678 11.9217 12.72 12.0415 12.7271 12.1838C12.7341 12.3248 12.6821 12.4509 12.5711 12.5621C12.4601 12.6733 12.3372 12.7289 12.2025 12.729C12.0677 12.7291 11.9448 12.6736 11.8336 12.5626L6.36504 7.102Z"
+          fill="#F5F5F5"></path>
+      </svg>
+    </button>
+
+    <div class="internal-links" id="nav-menu">
+      <HeaderLink href="/">Home</HeaderLink>
+      <HeaderLink href="/blog">Blog</HeaderLink>
+      <HeaderLink href="/about">About</HeaderLink>
+    </div>
+    <!-- <div class="social-links">
 			<a href="https://m.webtoo.ls/@astro" target="_blank">
 				<span class="sr-only">Follow Astro on Mastodon</span>
 				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
@@ -39,47 +52,134 @@ import HeaderLink from './HeaderLink.astro';
 					></path></svg
 				>
 			</a>
-		</div>
-	</nav>
+		</div> -->
+  </nav>
 </header>
 <style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
+  header {
+    margin: 0;
+    padding: 0 1em;
+    background: var(--background);
+    box-shadow: 0 2px 8px rgba(var(--black), 5%);
+  }
+  h2 {
+    margin: 0;
+    font-size: 1em;
+  }
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
+  h2 a,
+  h2 a.active {
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    /* height: 50px; */
+    width: auto;
+    margin-right: 1em;
+  }
+  nav a {
+    padding: 1em 0.5em;
+    color: var(--black);
+    border-bottom: 4px solid transparent;
+    text-decoration: none;
+  }
+  nav a.active {
+    text-decoration: none;
+    border-bottom-color: var(--accent);
+  }
+  .social-links,
+  .social-links a {
+    display: flex;
+  }
+  @media (max-width: 720px) {
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5em;
+      gap: 8px;
+      position: relative;
+      z-index: 1001;
+      color: var(--icon-color);
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 2px;
+      background-color: var(--icon-color);
+      transition: 0.3s;
+      display: block;
+    }
+    .menu-toggle span:nth-child(2) {
+      width: 20px;
+    }
+    .menu-toggle .close-icon {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .menu-toggle.active span {
+      display: none;
+    }
+    .menu-toggle.active .close-icon {
+      display: block;
+      color: var(--icon-color);
+    }
+    .internal-links {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--overlay-bg);
+      z-index: 1000;
+    }
+    .internal-links.active {
+      display: flex;
+    }
+    .internal-links a {
+      padding: 1em;
+      font-size: 1.5em;
+      border-bottom: none;
+    }
+    .social-links {
+      display: none;
+    }
+  }
+  @media (min-width: 721px) {
+    .menu-toggle {
+      display: none;
+    }
+  }
 </style>
+
+<script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const navMenu = document.getElementById("nav-menu");
+
+  menuToggle?.addEventListener("click", () => {
+    const isActive = menuToggle.classList.toggle("active");
+    navMenu?.classList.toggle("active");
+    document.body.style.overflow = isActive ? "hidden" : "";
+  });
+
+  // Close menu when a link is clicked
+  document.querySelectorAll(".internal-links a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menuToggle?.classList.remove("active");
+      navMenu?.classList.remove("active");
+      document.body.style.overflow = "";
+    });
+  });
+</script>
