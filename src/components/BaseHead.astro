@@ -9,7 +9,7 @@ import { Font } from 'astro:assets';
 
 interface Props {
 	title: string;
-	description: string;
+	description?: string;
 	image?: ImageMetadata;
 }
 
@@ -37,6 +37,35 @@ const { title, description, image = FallbackImage } = Astro.props;
 		const storedTheme = localStorage.getItem('theme');
 		const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 		document.documentElement.dataset.theme = storedTheme || systemTheme;
+	})();
+</script>
+
+<script>
+	(function () {
+		const init = (img: Element) => {
+			if (!(img instanceof HTMLImageElement)) return;
+			if (img.closest?.('[data-loadimg]')) return;
+			if (img.dataset.imgState) return;
+
+			const set = (state: 'loading' | 'loaded' | 'error') => (img.dataset.imgState = state);
+
+			if (img.complete) {
+				set(img.naturalWidth > 0 ? 'loaded' : 'error');
+				return;
+			}
+
+			set('loading');
+			img.addEventListener('load', () => set('loaded'), { once: true });
+			img.addEventListener('error', () => set('error'), { once: true });
+		};
+
+		const scan = () => document.querySelectorAll('img').forEach(init);
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', scan, { once: true });
+		} else {
+			scan();
+		}
 	})();
 </script>
 

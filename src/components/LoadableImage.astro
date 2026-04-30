@@ -1,0 +1,141 @@
+---
+import { Image } from "astro:assets";
+
+type Props = {
+  src: Parameters<typeof Image>[0]["src"] | any;
+  alt: string;
+  width?: number;
+  height?: number;
+  sizes?: string;
+  class?: string;
+  loading?: "eager" | "lazy";
+  decoding?: "sync" | "async" | "auto";
+  spinner?: boolean;
+};
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  sizes,
+  class: className,
+  loading = "lazy",
+  decoding = "async",
+  spinner = false,
+} = Astro.props;
+
+const imgProps: Props = {
+  src,
+  alt,
+  ...(width !== undefined ? { width } : {}),
+  ...(height !== undefined ? { height } : {}),
+  ...(sizes ? { sizes } : {}),
+  loading,
+  decoding,
+  class: className,
+};
+
+const hasDims = typeof width === "number" && typeof height === "number";
+const hasSizes = typeof sizes === "string" && sizes.length > 0;
+---
+
+<div class={`loadimg ${className ?? ""}`} data-loadimg data-spinner={spinner ? "true" : "false"}>
+  <div class="loadimg__placeholder" aria-hidden="true">
+    {spinner ? <div class="loadimg__spinner"></div> : null}
+  </div>
+  {
+    hasDims ? (
+      hasSizes ? (
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          sizes={sizes}
+          loading={loading}
+          decoding={decoding}
+          class="loadimg__img"
+        />
+      ) : (
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          loading={loading}
+          decoding={decoding}
+          class="loadimg__img"
+        />
+      )
+    ) : hasSizes ? (
+      <Image
+        src={src}
+        alt={alt}
+        sizes={sizes}
+        loading={loading}
+        decoding={decoding}
+        class="loadimg__img"
+      />
+    ) : (
+      <Image
+        src={src}
+        alt={alt}
+        loading={loading}
+        decoding={decoding}
+        class="loadimg__img"
+      />
+    )
+  }
+</div>
+
+<script is:inline>
+  (() => {
+    if (window.__loadimgInit) return;
+    window.__loadimgInit = true;
+
+    const init = (root) => {
+      if (!root || root.dataset.loadimgInit) return;
+      root.dataset.loadimgInit = "true";
+
+      const img = root.querySelector("img");
+      if (!img) return;
+
+      const markLoaded = () => root.classList.add("is-loaded");
+      const markError = () => {
+        root.classList.add("has-error");
+        root.classList.add("is-loaded");
+      };
+
+      if (img.complete) {
+        if (img.naturalWidth > 0) markLoaded();
+        else markError();
+        return;
+      }
+
+      img.addEventListener("load", markLoaded, { once: true });
+      img.addEventListener("error", markError, { once: true });
+    };
+
+    const scan = () => document.querySelectorAll("[data-loadimg]").forEach(init);
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", scan, { once: true });
+    } else {
+      scan();
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        for (const n of m.addedNodes) {
+          if (!(n instanceof Element)) continue;
+          if (n.matches?.("[data-loadimg]")) init(n);
+          n.querySelectorAll?.("[data-loadimg]").forEach(init);
+        }
+      }
+    });
+
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  })();
+</script>
+

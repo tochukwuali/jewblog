@@ -1,9 +1,9 @@
 ---
-import { Image } from "astro:assets";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Button from "../components/Button.astro";
+import LoadableImage from "../components/LoadableImage.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import hero from "../assets/jewblog_hero.jpg";
 import JewChilling from "../assets/jewchilling.jpg";
@@ -17,17 +17,19 @@ import JewChilling from "../assets/jewchilling.jpg";
   <body>
     <Header />
     <main>
-      <h1 class="header1">Jubilee Edeh</h1>
+      <h1 class="header1" style="margin: 0; line-height:0.3; padding:0;">
+        Jubilee Edeh
+      </h1>
       <div style="margin: 2em 0;" class="header-buttons">
         <Button
-          href="/blog"
+          href="/projects"
           rounded
           background="rgba(244, 184, 75, 1)"
           class="btn-items"
           variant="primary">CREATIVE WRITER</Button
         >
         <Button
-          href="/blog"
+          href="/projects"
           rounded
           class="btn-items"
           background="rgba(212, 237, 109, 1)"
@@ -35,12 +37,19 @@ import JewChilling from "../assets/jewchilling.jpg";
         >
       </div>
       <div class={"hero-image"}>
-        <Image src={hero} alt={"Jubilee"} />
+        <LoadableImage
+          class="home-hero-img"
+          src={hero}
+          alt={"Jubilee"}
+          loading="eager"
+          spinner
+        />
       </div>
-      <div>
+      <div style="margin-top: 28px;">
         <p>
-          Hey hey, I'm Jubilee 👋 <br /> Wordsmith by birth, sales whisperer by hustle,
-          product design dabbler only by curiosity, and failed content creator.
+          Hey hey, I'm Jubilee 👋 <br />
+          <br /> Wordsmith by birth, sales whisperer by hustle, product design dabbler
+          only by curiosity, and failed content creator.
         </p>
         <p>
           Whatever brought you here—fate, SEO, or a wrong turn—I’ve got a clever
@@ -49,47 +58,62 @@ import JewChilling from "../assets/jewchilling.jpg";
       </div>
 
       <div class="width: 100%">
-        <Button rounded background="#fff" class="full-width">
+        <Button rounded background="#fff" class="full-width long-btn">
           Watch my hello video
         </Button>
       </div>
 
-      <div class={"jewchilling-img"}>
-        <Image src={JewChilling} alt={"Jubilee"} />
-      </div>
+      <section>
+        <div class={"jewchilling-img"}>
+          <LoadableImage class="home-secondary-img" src={JewChilling} alt={"Jubilee"} />
+        </div>
+        <div class="font-ligema" style="margin-top: 12px; text-align: center;">
+          <p style="font-size: 44px; margin: 0;padding: 0;line-height:1">
+            I EnJOY WATCHING FILmS AND LISTENING To MUSIC WHEN I'M NOT BUSY
+            WRITING.
+          </p>
+        </div>
+      </section>
     </main>
     <Footer />
-	 <style>
-    .hero-image {
-      max-height: 24rem;
-      overflow: hidden;
-      border-radius: 8px;
-    }
+    <style>
+      .hero-image {
+        max-height: 24rem;
+        overflow: hidden;
+        border-radius: 8px;
+      }
 
-    .hero-image img {
-      width: 100% !important;
-      height: auto !important;
-      /* object-fit: contain; */
-      display: block;
-    }
+      .home-hero-img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
 
-    .header-buttons {
-      display: flex;
-      justify-content: space-between;
-    }
+      .header-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
 
-    .header-buttons button,
-    .header-buttons .btn-items {
-      text-transform: uppercase;
-    }
+      .header-buttons button,
+      .header-buttons .btn-items {
+        text-transform: uppercase;
+      }
 
-    .btn-items {
-      text-transform: uppercase;
-    }
+      .btn-items {
+        text-transform: uppercase;
+      }
 
-	.jewchilling-img {
-		margin-top: 4rem;
-	}
-  </style>
+      .long-btn {
+        padding: 0.65rem 0 !important;
+      }
+
+      .jewchilling-img {
+        margin-top: 4rem;
+      }
+
+      .home-secondary-img {
+        width: 100%;
+      }
+    </style>
   </body>
 </html>

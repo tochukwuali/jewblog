@@ -1,0 +1,162 @@
+---
+import { getCollection } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import Header from "../../components/Header.astro";
+import LoadableImage from "../../components/LoadableImage.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      main {
+        width: 960px;
+      }
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      ul li {
+        width: calc(50% - 1rem);
+      }
+      ul li * {
+        text-decoration: none;
+        transition: 0.2s ease;
+      }
+      ul li:first-child {
+        width: 100%;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      ul li:first-child .project-thumb {
+        width: 100%;
+      }
+      ul li:first-child .title {
+        font-size: 2.369rem;
+      }
+      ul li .project-thumb {
+        margin-bottom: 0.5rem;
+        border-radius: 12px;
+      }
+      ul li a {
+        display: block;
+      }
+      .title {
+        margin: 0;
+        color: rgb(var(--black));
+        line-height: 1;
+        font-size: 32px;
+      }
+      .date {
+        margin: 0;
+        color: rgb(var(--gray));
+      }
+      ul li a:hover .title,
+      ul li a:hover .date {
+        color: rgb(var(--accent));
+      }
+      ul a:hover .project-thumb {
+        box-shadow: var(--box-shadow);
+      }
+
+	  .title-details {
+         display: flex;
+		 justify-content: space-between;
+        }
+      @media (max-width: 720px) {
+        ul {
+          gap: 0.5em;
+        }
+        ul li {
+          width: 100%;
+          /* text-align: center; */
+          margin-top: 32px;
+        }
+        ul li:first-child {
+          margin-bottom: 0;
+          text-align: left;
+        }
+
+        .title {
+          font-size: 1.2rem;
+        }
+        ul li:first-child .title {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section>
+        <ul>
+          {
+            posts.map((post) => (
+              <li>
+                <a href={`/projects/${post.id}/`}>
+                  {post.data.heroImage && (
+                    <LoadableImage
+                      class="project-thumb"
+                      width={392}
+                      height={360}
+                      src={post.data.heroImage}
+                      alt=""
+                    />
+                  )}
+                  <div class="title-details">
+                    <div>
+                      <h4 class="title">{post.data.title}</h4>
+                      <p class="date">
+                        <FormattedDate date={post.data.pubDate} />
+                      </p>
+                    </div>
+                    <div>
+                      <svg
+                        width="34"
+                        height="34"
+                        viewBox="0 0 34 34"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M22.3435 20.2204L23.6188 11.7314L15.1298 10.4561"
+                          stroke="#CDD1D6"
+                          stroke-width="1.5"
+                          stroke-miterlimit="10"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M9.94563 21.833L23.4822 11.8325"
+                          stroke="#CDD1D6"
+                          stroke-width="1.5"
+                          stroke-miterlimit="10"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

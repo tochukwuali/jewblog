@@ -26,7 +26,11 @@ const style = background
   class={`btn btn-${variant} ${rounded ? "btn-rounded" : ""} ${className || ""}`}
   style={style}
 >
-  <slot />
+  <span class="btn-content">
+    <slot name="iconBefore" />
+    <span class="btn-label"><slot /></span>
+    <slot name="iconAfter" />
+  </span>
 </Component>
 
 <style>
@@ -34,13 +38,31 @@ const style = background
     padding: 0.35em 1.5em;
     border: none;
     border-radius: 6px;
-    /* font-size: 20px; */
-    /* font-family: var(--font-primary), sans-serif; */
     cursor: pointer;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s ease;
     font-weight: 600;
+  }
+
+  /* Allow custom classes to override button styles */
+  .btn[class*="custom-"],
+  .btn[class*="my-"] {
+    /* Custom classes can override these */
+  }
+
+  .btn-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+
+  .btn-label {
+    display: inline-flex;
+    align-items: center;
   }
 
   .btn-primary {
@@ -57,7 +79,7 @@ const style = background
   .btn-secondary {
     background-color: var(--text);
     color: var(--overlay-bg);
-    border: 2px solid var(--text);
+    border: 1px solid var(--text);
   }
 
   .btn-secondary:hover {
@@ -67,12 +89,13 @@ const style = background
 
   .btn-outline {
     background-color: transparent;
-    color: var(--accent);
-    border: 2px solid var(--accent);
+    color: var(--text);
+    border: 1px solid var(--text);
+    font-weight: 400;
   }
 
   .btn-outline:hover {
-    background-color: var(--accent);
+    background-color: var(--text);
     color: var(--overlay-bg);
   }
 
