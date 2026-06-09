@@ -185,9 +185,18 @@ import logo from "../assets/jewlogo.svg"; // Adjust path if needed
   const menuToggle = document.getElementById("menu-toggle");
   const navMenu = document.getElementById("nav-menu");
 
+  // Initialize aria attributes
+  menuToggle?.setAttribute("aria-expanded", "false");
+  navMenu?.setAttribute("aria-hidden", "true");
+
   menuToggle?.addEventListener("click", () => {
     const isActive = menuToggle.classList.toggle("active");
     navMenu?.classList.toggle("active");
+    
+    // Update aria attributes
+    menuToggle.setAttribute("aria-expanded", isActive ? "true" : "false");
+    navMenu?.setAttribute("aria-hidden", isActive ? "false" : "true");
+    
     document.body.style.overflow = isActive ? "hidden" : "";
   });
 
@@ -196,6 +205,11 @@ import logo from "../assets/jewlogo.svg"; // Adjust path if needed
     link.addEventListener("click", () => {
       menuToggle?.classList.remove("active");
       navMenu?.classList.remove("active");
+      
+      // Update aria attributes
+      menuToggle?.setAttribute("aria-expanded", "false");
+      navMenu?.setAttribute("aria-hidden", "true");
+      
       document.body.style.overflow = "";
     });
   });
