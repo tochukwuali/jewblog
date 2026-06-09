@@ -27,8 +27,8 @@
   --accent: #8ab4f8;
   --accent-dark: #c0d6ff;
   --black: 255, 255, 255;
-  --gray: 171, 181, 201;
-  --gray-light: 33, 36, 44;
+  --gray: 195, 195, 195;
+  --gray-light: 38, 38, 38;
   --gray-dark: 243, 244, 246;
   --gray-gradient: 23, 23, 23, 1;
   --box-shadow:
@@ -51,14 +51,15 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   color: var(--text);
-  font-size: 20px;
+  font-size: 22px;
   line-height: 1.7;
 }
+
 main {
   width: 720px;
   max-width: calc(100% - 2em);
   margin: auto;
-  padding: 3em 1em;
+  padding: 2em 1em;
 }
 h1,
 h2,
@@ -119,13 +120,12 @@ img {
 
 /* Skeleton for "plain" <img> elements (e.g. Markdown content) */
 img[data-img-state="loading"] {
-  background:
-    linear-gradient(
-      110deg,
-      rgba(var(--gray-light), 0.65) 8%,
-      rgba(var(--gray), 0.12) 18%,
-      rgba(var(--gray-light), 0.65) 33%
-    );
+  background: linear-gradient(
+    110deg,
+    rgba(var(--gray-light), 0.65) 8%,
+    rgba(var(--gray), 0.12) 18%,
+    rgba(var(--gray-light), 0.65) 33%
+  );
   background-size: 200% 100%;
   animation: loadimg-shimmer 1.1s linear infinite;
 }
@@ -155,13 +155,12 @@ img[data-img-state="error"] {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background:
-    linear-gradient(
-      110deg,
-      rgba(var(--gray-light), 0.65) 8%,
-      rgba(var(--gray), 0.12) 18%,
-      rgba(var(--gray-light), 0.65) 33%
-    );
+  background: linear-gradient(
+    110deg,
+    rgba(var(--gray-light), 0.65) 8%,
+    rgba(var(--gray), 0.12) 18%,
+    rgba(var(--gray-light), 0.65) 33%
+  );
   background-size: 200% 100%;
   animation: loadimg-shimmer 1.1s linear infinite;
   display: grid;
@@ -223,35 +222,34 @@ svg {
   font-family: var(--font-ligema), sans-serif;
   font-size: 6rem;
   width: 100vw;
+  font-weight: 400;
 }
+
+.header1-container {
+    margin: 5px 0;
+  }
 
 .full-width {
   width: 100%;
 }
 
 .long-btn {
-	   padding: 0.85rem 0 !important;
-	}
+  padding: 0.85rem 0 !important;
+}
+
+.outline-btn {
+  padding: 0.85rem 1.5rem !important;
+  font-family: var(--font-primary), sans-serif !important;
+}
 
 .font-ligema {
-	 font-family: var(--font-ligema), sans-serif;
+  font-family: var(--font-ligema), sans-serif;
 }
 
 .btn-items {
   font-family: var(--font-ligema), sans-serif;
   font-size: 20px;
-}
-
-@media (max-width: 720px) {
-  body {
-    font-size: 16px;
-  }
-  main {
-    padding: 1em;
-  }
-  .prose p {
-    font-size: 15px;
-  }
+  padding: 6px 12px !important;
 }
 
 .sr-only {
@@ -270,4 +268,57 @@ svg {
   clip-path: inset(50%);
   /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
+}
+
+/* @media (max-width: 720px) {
+  body {
+    font-size: 16px;
+  }
+  main {
+    padding: 1em;
+  }
+  .prose p {
+    font-size: 15px;
+  }
+} */
+
+@media (min-width: 768px) {
+  .header1 {
+    font-size: 3.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    width: 100%;
+    max-width: calc(100% - 2em);
+  }
+  .header1 {
+    font-size: 15rem;
+    font-weight: 400;
+    /* margin: 2rem 0; */
+  }
+
+  .header1-container {
+    margin: 2rem 0;
+  }
+
+  .btn-items {
+    font-family: var(--font-ligema), sans-serif;
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 1578px) {
+  main {
+    width: 1440px;
+    max-width: calc(100% - 2em);
+    margin: 0 auto;
+  }
+
+   .header1 {
+    font-size: 25rem;
+    font-weight: 400;
+    /* margin: 2rem 0; */
+  }
 }

@@ -58,10 +58,12 @@ import logo from "../assets/jewlogo.svg"; // Adjust path if needed
 </header>
 <style>
   header {
-    margin: 0;
+    margin: 0 auto;
     padding: 0 1em;
     background: var(--background);
     box-shadow: 0 2px 8px rgba(var(--black), 5%);
+    width: 1024px;
+    max-width: calc(100% - 2em);
   }
   h2 {
     margin: 0;
@@ -161,6 +163,20 @@ import logo from "../assets/jewlogo.svg"; // Adjust path if needed
   @media (min-width: 721px) {
     .menu-toggle {
       display: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    header {
+      width: 1440px;
+      max-width: calc(100% - 2em);
+    }
+  }
+
+  @media (min-width: 1578px) {
+    header {
+      width: 1440px;
+      max-width: calc(100% - 2em);
     }
   }
 </style>

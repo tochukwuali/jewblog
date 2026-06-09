@@ -7,6 +7,7 @@ import LoadableImage from "../components/LoadableImage.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import hero from "../assets/jewblog_hero.jpg";
 import JewChilling from "../assets/jewchilling.jpg";
+import JewChilling2 from "../assets/jewchilling2.jpg";
 ---
 
 <!doctype html>
@@ -17,76 +18,244 @@ import JewChilling from "../assets/jewchilling.jpg";
   <body>
     <Header />
     <main>
-      <h1 class="header1" style="margin: 0; line-height:0.3; padding:0;">
-        Jubilee Edeh
-      </h1>
+      <div class="header1-container">
+        <h1 class="header1" style="margin: 0; line-height:0.3; padding:0;">
+          Jubilee Edeh
+        </h1>
+      </div>
+
       <div style="margin: 2em 0;" class="header-buttons">
         <Button
-          href="/projects"
           rounded
           background="rgba(244, 184, 75, 1)"
           class="btn-items"
           variant="primary">CREATIVE WRITER</Button
         >
         <Button
-          href="/projects"
           rounded
           class="btn-items"
           background="rgba(212, 237, 109, 1)"
-          variant="primary">ADAPTIVE STORYTELLER</Button
+          variant="primary">ADAPTABLE STORYTELLER</Button
         >
       </div>
-      <div class={"hero-image"}>
-        <LoadableImage
-          class="home-hero-img"
-          src={hero}
-          alt={"Jubilee"}
-          loading="eager"
-          spinner
-        />
-      </div>
-      <div style="margin-top: 28px;">
-        <p>
-          Hey hey, I'm Jubilee 👋 <br />
-          <br /> Wordsmith by birth, sales whisperer by hustle, product design dabbler
-          only by curiosity, and failed content creator.
-        </p>
-        <p>
-          Whatever brought you here—fate, SEO, or a wrong turn—I’ve got a clever
-          fix and a perfect idea with your name on it.
-        </p>
-      </div>
 
-      <div class="width: 100%">
-        <Button rounded background="#fff" class="full-width long-btn">
-          Watch my hello video
-        </Button>
-      </div>
+      <div class="hero-block">
+        <!-- <div class="hero-left" aria-hidden="true">
+          <Button
+            href="/projects"
+            rounded
+            background="rgba(244, 184, 75, 1)"
+            class="btn-items btn-left"
+            variant="primary">CREATIVE WRITER</Button
+          >
+        </div> -->
 
-      <section>
-        <div class={"jewchilling-img"}>
-          <LoadableImage class="home-secondary-img" src={JewChilling} alt={"Jubilee"} />
+        <div class={"hero-image"}>
+          <LoadableImage
+            class="home-hero-img"
+            src={hero}
+            alt={"Jubilee"}
+            loading="eager"
+            spinner
+          />
         </div>
-        <div class="font-ligema" style="margin-top: 12px; text-align: center;">
-          <p style="font-size: 44px; margin: 0;padding: 0;line-height:1">
+
+        <div class="hero-side">
+          <!-- <div class="hero-buttons">
+            <Button
+              href="/projects"
+              rounded
+              background="rgba(244, 184, 75, 1)"
+              class="btn-items"
+              variant="primary">CREATIVE WRITER</Button
+            >
+            <Button
+              href="/projects"
+              rounded
+              class="btn-items"
+              background="rgba(212, 237, 109, 1)"
+              variant="primary">ADAPTIVE STORYTELLER</Button
+            >
+          </div> -->
+
+          <div class="hero-text" style="margin-top: 1rem;">
+            <p>
+              Hey hey, I'm Jubilee 👋 <br />
+              <br /> Wordsmith by birth, sales whisperer by hustle, product design
+              dabbler only by curiosity, and failed content creator.
+            </p>
+            <p>
+              Whatever brought you here—fate, SEO, or a wrong turn—I’ve got a
+              clever fix and a perfect idea with your name on it.
+            </p>
+          </div>
+
+          <div class="hero-watch" style="margin-top: 1rem;">
+            <Button rounded background="#fff" class="full-width long-btn">
+              Watch my hello video
+               <svg
+              slot="iconAfter"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.025 4.94189L17.0834 10.0002L12.025 15.0586"
+                stroke="#000"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                d="M2.91663 10H16.9416"
+                stroke="#000"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <section class="secondary-home-section">
+        <div class={"jewchilling-img"}>
+          <LoadableImage
+            class="home-secondary-img"
+            src={JewChilling}
+            alt={"Jubilee"}
+          />
+        </div>
+        <div class="secondary-home-text">
+          <p class="font-ligema">
             I EnJOY WATCHING FILmS AND LISTENING To MUSIC WHEN I'M NOT BUSY
             WRITING.
           </p>
+          <p>See what I get up to when working</p>
+          <Button
+            rounded
+            class="back-btn outline-btn"
+            rounded
+            variant="outline"
+          >
+            View Projects
+            <svg
+              slot="iconAfter"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.025 4.94189L17.0834 10.0002L12.025 15.0586"
+                stroke="#D7D7D7"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                d="M2.91663 10H16.9416"
+                stroke="#D7D7D7"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </Button>
+        </div>
+      </section>
+
+      <section class="tertiary-home-section">
+        <div class={"jewchilling-img"}>
+          <LoadableImage
+            class="home-secondary-img"
+            src={JewChilling2}
+            alt={"Jubilee"}
+          />
+        </div>
+        <div class="tertiary-home-text">
+          <p class="font-ligema">
+            DRIVEN BY THE LOVE FOR STORYTELLING AND a DESIRE FOR RECOGNITION AND
+            GROWTH.
+          </p>
+          <p class="tertiary-home-subtext">
+            Explore the world through captivating travel videos on YouTube.
+          </p>
+          <Button
+            rounded
+            class="back-btn outline-btn"
+            rounded
+            variant="outline"
+          >
+            View Blog
+            <svg
+              slot="iconAfter"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.025 4.94189L17.0834 10.0002L12.025 15.0586"
+                stroke="#D7D7D7"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                d="M2.91663 10H16.9416"
+                stroke="#D7D7D7"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </Button>
         </div>
       </section>
     </main>
     <Footer />
     <style>
       .hero-image {
-        max-height: 24rem;
-        overflow: hidden;
+        max-width: 900px;
+        margin: 8px auto 0;
         border-radius: 8px;
+        position: relative;
       }
 
       .home-hero-img {
         width: 100%;
         height: auto;
         border-radius: 8px;
+      }
+
+      /* Responsive hero: image left, buttons + text on right for desktop */
+      .hero-block {
+        margin: 2em 0;
+      }
+
+      .hero-side {
+        margin-top: 1rem;
+      }
+
+      .hero-buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .hero-left {
+        display: none;
+      }
+
+      .hero-text {
+        font-size: 16px;
+        color: rgb(var(--gray));
       }
 
       .header-buttons {
@@ -108,11 +277,172 @@ import JewChilling from "../assets/jewchilling.jpg";
       }
 
       .jewchilling-img {
-        margin-top: 4rem;
+        max-width: 720px;
+        margin: 4rem auto 0;
       }
 
       .home-secondary-img {
         width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      .tertiary-home-section .home-secondary-img .loadimg__img {
+        max-height: 320px !important;
+        width: auto;
+        object-fit: contain;
+      }
+
+      .secondary-home-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .secondary-home-text {
+        margin-top: 12px;
+        text-align: center;
+      }
+      .secondary-home-text p:first-child {
+        font-size: 40px;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+      }
+
+      .secondary-home-text p:nth-child(2) {
+        font-size: 16px;
+        color: rgb(var(--gray));
+        /* margin: 0;
+        padding: 0;
+        line-height: 1; */
+      }
+
+      .tertiary-home-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+        margin: 4rem 0;
+      }
+
+      .tertiary-home-text p:first-child {
+        font-size: 40px;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+      }
+
+      .tertiary-home-subtext {
+        font-size: 16px;
+        color: rgb(var(--gray));
+      }
+
+      @media (min-width: 1024px) {
+        .hero-image {
+          max-width: 680px;
+        }
+
+        .hero-block {
+          display: flex;
+          align-items: flex-start;
+          gap: 2rem;
+          max-width: 1024px;
+          margin: 2em auto;
+        }
+
+        .hero-image {
+          flex: 0 0 58%;
+        }
+
+        .hero-side {
+          flex: 1 1 42%;
+          margin-top: 0;
+        }
+
+        .hero-text {
+          margin-top: 50% !important;
+        }
+
+        /* left button beside the image (desktop) */
+        .hero-left {
+          display: flex;
+          align-items: flex-start;
+          flex: 0 0 auto;
+          margin-top: 0;
+        }
+
+        .hero-left .btn-items {
+          display: inline-block;
+        }
+
+        /* show hero-side buttons on desktop (hide on mobile) */
+        .hero-side .hero-buttons {
+          display: flex;
+        }
+
+        /* hide the original header buttons on desktop */
+        /* .header-buttons {
+          display: none;
+        } */
+
+        .home-hero-img {
+          display: flex;
+          justify-content: center;
+        }
+
+        .home-hero-img .loadimg__img {
+          display: block !important;
+          margin: 0 auto !important;
+          width: auto !important;
+          height: auto !important;
+          max-width: 100% !important;
+          max-height: 588px !important;
+          object-fit: contain !important;
+        }
+
+        .jewchilling-img {
+          max-width: 620px;
+        }
+
+        .home-secondary-img {
+          display: flex;
+          justify-content: center;
+        }
+
+        .home-secondary-img .loadimg__img {
+          display: block !important;
+          margin: 0 auto !important;
+          width: auto !important;
+          height: auto !important;
+          max-width: 100% !important;
+          /* max-height: 532px !important; */
+          object-fit: contain !important;
+        }
+
+        .secondary-home-section {
+          display: flex;
+          flex-direction: column-reverse;
+          align-items: center;
+          gap: 2rem;
+        }
+
+        .secondary-home-text {
+          width: 780px;
+          margin: 4rem auto;
+        }
+        .secondary-home-text p:first-child {
+          font-size: 72px;
+        }
+
+        .tertiary-home-section {
+          flex-direction: row;
+          align-items: center;
+          gap: 2rem;
+          margin: 4rem 0;
+        }
       }
     </style>
   </body>

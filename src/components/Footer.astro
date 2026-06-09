@@ -3,6 +3,36 @@ const today = new Date();
 ---
 
 <footer>
+  <div class="cta-section">
+    <div class="cta-text">
+      <p class="font-ligema">LET'S WOrK TOgETHeR</p>
+       <svg
+              slot="iconAfter"
+              width="34"
+              height="34"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.025 4.94189L17.0834 10.0002L12.025 15.0586"
+                stroke="#D7D7D7"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                d="M2.91663 10H16.9416"
+                stroke="#D7D7D7"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+    </div>
+    
+    <p class="cta-sub-section">I craft imaginative narratives and engaging scripts that captivate audiences and transport them to different worlds.</p>
+  </div>
   <div class="social-links">
     <a href="https://x.com/Jewbelee" target="_blank">
       <!-- <span class="sr-only">Follow Astro on Mastodon</span> -->
@@ -18,10 +48,9 @@ const today = new Date();
     </a>
   </div>
   <div class="footer-copyright">
-	<p>&copy; jubileedeh, {today.getFullYear()}</p>
-	<p>jubileedeh@gmail.com</p>
+    <p>&copy; jubileedeh, {today.getFullYear()}</p>
+    <p>jubileedeh@gmail.com</p>
   </div>
-   
 </footer>
 <style>
   footer {
@@ -32,13 +61,13 @@ const today = new Date();
   }
 
   .footer-copyright {
-	display: flex;
-	justify-content: space-between;
-	gap: 0.5em;
-	margin-top: 2em;
-	font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5em;
+    margin-top: 2em;
+    font-size: 14px;
   }
-  
+
   .social-links {
     display: flex;
     justify-content: center;
@@ -48,8 +77,54 @@ const today = new Date();
   .social-links a {
     text-decoration: none;
     color: rgb(var(--gray));
+    font-size: 16px;
   }
   .social-links a:hover {
     color: rgb(var(--gray-dark));
+  }
+
+  .cta-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .cta-text {
+    background: rgba(var(--gray-light), 0.9);
+    padding: 15px 20px;
+    width: 90%;
+    border-radius: 80px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .cta-text p {
+    font-size: 45px;
+    margin: 0;
+    font-weight: 400;
+    color: rgb(var(--gray-dark));
+  }
+
+  .cta-sub-section {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 34px;
+  }
+
+  @media (min-width: 1024px) {
+    footer {
+      width: 1024px !important;
+      max-width: calc(100% - 2em) !important;
+      margin: 0 auto !important;
+    }
+  }
+
+   @media (min-width: 1578px) {
+    footer {
+      width: 1024px !important;
+      max-width: calc(100% - 2em) !important;
+      margin: 0 auto !important;
+    }
   }
 </style>
