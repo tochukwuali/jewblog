@@ -24,7 +24,7 @@ const substackSyncIntegration = {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://jewblog-five.vercel.app",
   integrations: [substackSyncIntegration, mdx(), sitemap()],
   fonts: [
     {
