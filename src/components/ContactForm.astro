@@ -1,0 +1,173 @@
+<div class="form-wrapper">
+  <form id="contact-form" class="contact-form">
+    <div class="form-grid">
+      <label class="" for="fullname">Full Name</label>
+      <input
+        type="text"
+        id="fullname"
+        name="fullname"
+        placeholder="Full Name"
+      />
+
+      <label class="" for="email">Email Address</label>
+      <input type="text" id="email" name="email" placeholder="Email" />
+
+      <label class="" for="number">PhoneNumber</label>
+      <input type="text" id="number" name="number" placeholder="Number" />
+
+      <!-- <label class="sr-only" for="project-type">Project Type</label>
+      <input type="text" id="project-type" name="projectType" placeholder="Project Type" />
+
+      <label class="sr-only" for="input-text">Input text</label>
+      <input type="text" id="input-text" name="inputText" placeholder="Input text" />
+
+      <label class="sr-only" for="budget">Budget</label>
+      <input type="text" id="budget" name="budget" placeholder="Budget" /> -->
+    </div>
+
+    <label class="" for="message">Your message</label>
+    <textarea
+      id="message"
+      name="message"
+      placeholder="Tell me about your project..."
+      rows="4"></textarea>
+
+    <button type="submit" class="submit-btn">
+      Submit <span class="arrow">→</span>
+    </button>
+  </form>
+</div>
+
+<style>
+  .form-wrapper {
+    width: 100%;
+    /* border: 2px dashed #00e5ff; */
+    border-radius: 8px;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  label {
+    font-size: 10px;
+    line-height: 16.2px;
+    letter-spacing: 0%;
+    color: rgba(82, 82, 82, 1);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  input,
+  textarea {
+    background: #1a1a1a;
+    border: none;
+    border-radius: 6px;
+    padding: 0.9rem 1rem;
+    color: #e0e0e0;
+    font-family: var(--font-primary), sans-serif;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    transition:
+      background 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #777;
+    opacity: 1;
+  }
+
+  input:focus,
+  textarea:focus {
+    background: #222;
+    box-shadow: 0 0 0 1px rgba(0, 230, 118, 0.3);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .submit-btn {
+    background: #f5f5f5;
+    color: #0d0d0d;
+    border: none;
+    border-radius: 50px;
+    padding: 0.9rem 2rem;
+    font-family: var(--font-primary), sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition:
+      background 0.2s ease,
+      transform 0.15s ease;
+    width: 100%;
+  }
+
+  .submit-btn:hover {
+    background: #e0e0e0;
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .arrow {
+    font-size: 1.2em;
+    transition: transform 0.2s ease;
+  }
+
+  .submit-btn:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  /* Responsive: single column for smaller screens */
+  @media (max-width: 500px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form-wrapper {
+      padding: 0.25rem;
+    }
+
+    .submit-btn {
+      padding: 0.4rem 2rem;
+    }
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("#contact-form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data: Record<string, string> = {};
+      formData.forEach((value, key) => {
+        data[key] = value.toString();
+      });
+      console.log("Contact form submitted:", data);
+      // TODO: Integrate with a form handler or API endpoint
+      alert("Thanks for reaching out! This is a demo form.");
+      form.reset();
+    });
+  }
+</script>

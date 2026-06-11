@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Button from "../components/Button.astro";
 import LoadableImage from "../components/LoadableImage.astro";
+import LoadingScreen from "../components/LoadingScreen.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import hero from "../assets/jewblog_hero.jpg";
 import JewChilling from "../assets/jewchilling.jpg";
@@ -16,6 +17,7 @@ import JewChilling2 from "../assets/jewchilling2.jpg";
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
+    <LoadingScreen />
     <Header />
     <main>
       <div class="header1-container">

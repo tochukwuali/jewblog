@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import BaseHead from "../../../components/BaseHead.astro";
+import Footer from "../../../components/Footer.astro";
+import Header from "../../../components/Header.astro";
+import ProjectList from "../../../components/ProjectList.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../../consts";
+
+const POSTS_PER_PAGE = 10;
+
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+const currentPage = Number(Astro.params.page);
+const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+const posts = allPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+
+export async function getStaticPaths() {
+  const POSTS_PER_PAGE = 10;
+  const allPosts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+
+  const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+  const pages = [];
+
+  // Page 1 is handled by /projects/index.astro, so start from page 2
+  for (let page = 2; page <= totalPages; page++) {
+    pages.push({ params: { page: String(page) } });
+  }
+
+  return pages;
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      main {
+        width: 960px;
+      }
+      @media (max-width: 720px) {
+        main {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section>
+        <ProjectList posts={posts} currentPage={currentPage} totalPages={totalPages} />
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
