@@ -2,24 +2,8 @@
 ---
 
 <div id="loading-screen" class="loading-screen">
-  <div class="sketch-container">
-    <!-- Sketch outline of the hero image -->
-    <div class="sketch-hero">
-      <div class="sketch-hero-inner">
-        <span class="sketch-label sketch-label-img">HERO</span>
-      </div>
-    </div>
-    <!-- Sketch title/heading lines -->
-    <div class="sketch-text">
-      <div class="sketch-line sketch-line-1"></div>
-      <div class="sketch-line sketch-line-2"></div>
-      <div class="sketch-line sketch-line-3"></div>
-    </div>
-    <!-- Sketch buttons -->
-    <div class="sketch-buttons">
-      <div class="sketch-btn"></div>
-      <div class="sketch-btn"></div>
-    </div>
+  <div class="typewriter-container">
+    <p class="typewriter-line">Jewbelee<span class="cursor">|</span></p>
   </div>
 </div>
 
@@ -45,92 +29,50 @@
     pointer-events: none;
   }
 
-  .sketch-container {
-    width: min(90vw, 600px);
+  .typewriter-container {
+    width: min(90vw, 680px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    text-align: center;
+    color: #ffffff;
   }
 
-  /* Hero sketch - dashed outline without card-like outline */
-  .sketch-hero {
-    width: 100%;
-    height: clamp(180px, 40vw, 320px);
-    position: relative;
-    opacity: 0;
-    animation: sketchReveal 0.8s ease-out 0.2s forwards;
+  .typewriter-line {
+    font-family: var(--font-ligema), ui-serif, Georgia, serif;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid rgba(255, 255, 255, 0.8);
+    width: 0;
+    opacity: 1;
+    animation: typing 1.8s steps(8, end) 0.8s forwards;
   }
 
-  .sketch-hero-inner {
-    width: 100%;
-    height: 100%;
-    border: 2px dashed rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: sketchDraw 2s linear 0.3s infinite;
+  .cursor {
+    display: inline-block;
+    width: 0.8ch;
+    animation: blink-caret 0.7s step-end infinite 0.8s;
   }
 
-  .sketch-label-img {
-    font-family: var(--font-ligema), monospace;
-    font-size: 2rem;
-    color: rgba(255, 255, 255, 0.25);
-    letter-spacing: 0.3em;
-  }
-
-  /* Title lines */
-  .sketch-text {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    opacity: 0;
-    animation: sketchReveal 0.8s ease-out 0.5s forwards;
-  }
-
-  .sketch-line {
-    height: 6px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
-  }
-
-  .sketch-line-1 { width: 80%; }
-  .sketch-line-2 { width: 60%; }
-  .sketch-line-3 { width: 40%; }
-
-  /* Buttons */
-  .sketch-buttons {
-    width: 100%;
-    display: flex;
-    gap: 16px;
-    opacity: 0;
-    animation: sketchReveal 0.8s ease-out 0.8s forwards;
-  }
-
-  .sketch-btn {
-    flex: 1;
-    height: 44px;
-    border: 2px dashed rgba(255, 255, 255, 0.3);
-    border-radius: 24px;
-  }
-
-  @keyframes sketchReveal {
+  @keyframes typing {
+    from {
+      width: 0;
+    }
     to {
-      opacity: 1;
+      width: 8ch;
     }
   }
 
-  @keyframes sketchDraw {
-    0% {
-      border-color: rgba(255, 255, 255, 0.15);
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
     }
     50% {
-      border-color: rgba(255, 255, 255, 0.4);
-    }
-    100% {
-      border-color: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.8);
     }
   }
 </style>
@@ -145,11 +87,11 @@
     loadingScreen?.classList.add('hidden');
     body.classList.remove('loading-screen-active');
   } else {
-    // Show sketch animation for ~2.5s then reveal the page
+    // Show typewriter animation then reveal the page
     setTimeout(() => {
       loadingScreen?.classList.add('hidden');
       body.classList.remove('loading-screen-active');
       sessionStorage.setItem('visited', 'true');
-    }, 2500);
+    }, 3200);
   }
 </script>
