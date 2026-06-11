@@ -55,6 +55,10 @@ body {
   line-height: 1.7;
 }
 
+body.loading-screen-active > :not(#loading-screen) {
+  visibility: hidden;
+}
+
 main {
   width: 720px;
   max-width: calc(100% - 2em);

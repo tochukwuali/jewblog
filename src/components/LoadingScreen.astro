@@ -137,17 +137,18 @@
 
 <script>
   const loadingScreen = document.getElementById('loading-screen');
+  const body = document.body;
   const isFirstVisit = !sessionStorage.getItem('visited');
 
   if (!isFirstVisit) {
     // Skip animation on repeat visits
     loadingScreen?.classList.add('hidden');
-    document.body.style.visibility = 'visible';
+    body.classList.remove('loading-screen-active');
   } else {
     // Show sketch animation for ~2.5s then reveal the page
     setTimeout(() => {
       loadingScreen?.classList.add('hidden');
-      document.body.style.visibility = 'visible';
+      body.classList.remove('loading-screen-active');
       sessionStorage.setItem('visited', 'true');
     }, 2500);
   }
