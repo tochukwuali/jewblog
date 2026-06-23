@@ -22,12 +22,15 @@ const posts = allPosts.slice(0, POSTS_PER_PAGE);
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
-      main {
-        width: 960px;
-      }
+      /* main {
+        max-width: 960px;
+        width: 100%;
+        box-sizing: border-box;"
+      } */
       @media (max-width: 720px) {
         main {
           width: 100%;
+          /* max-width: fit-content; */
         }
       }
     </style>

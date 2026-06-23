@@ -45,6 +45,8 @@ body {
   font-family: var(--font-primary), sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  max-width: 100%;
   text-align: left;
   background: var(--background);
   background-size: 100% 600px;
@@ -53,6 +55,7 @@ body {
   color: var(--text);
   font-size: 22px;
   line-height: 1.7;
+  width: 100%;
 }
 
 body.loading-screen-active > :not(#loading-screen) {
@@ -60,8 +63,8 @@ body.loading-screen-active > :not(#loading-screen) {
 }
 
 main {
-  width: 720px;
-  max-width: calc(100% - 2em);
+  width: 100%;
+  /* max-width: calc(100% - 2em); */
   margin: auto;
   padding: 2em 1em;
 }
@@ -143,7 +146,7 @@ img[data-img-state="error"] {
   display: block;
   overflow: hidden;
   border-radius: 12px;
-  background: rgba(var(--gray-light), 0.9);
+  /* background: rgba(var(--gray-light), 0.9); */
 }
 .loadimg__img {
   display: block;
@@ -341,6 +344,10 @@ svg {
 }
 
 @media (min-width: 768px) {
+   main {
+    width: 100%;
+    max-width: calc(100% - 2em);
+  }
   .header1 {
     font-size: 3.5rem;
   }
@@ -348,8 +355,9 @@ svg {
 
 @media (min-width: 1024px) {
   main {
-    width: 100%;
+    width: 900;
     max-width: calc(100% - 2em);
+    margin: 0 auto;
   }
   .header1 {
     font-size: 15rem;
@@ -369,8 +377,8 @@ svg {
 
 @media (min-width: 1578px) {
   main {
-    width: 1440px;
-    max-width: calc(100% - 2em);
+    width: 100%;
+    max-width: 1024px;
     margin: 0 auto;
   }
 
