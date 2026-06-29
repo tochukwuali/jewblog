@@ -26,6 +26,9 @@ const substackSyncIntegration = {
 export default defineConfig({
   site: "https://jewblog-five.vercel.app",
   integrations: [substackSyncIntegration, mdx(), sitemap()],
+  image: {
+    domains: ["substackcdn.com"],
+  },
   fonts: [
     {
       provider: fontProviders.local(),
