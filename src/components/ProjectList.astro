@@ -14,60 +14,76 @@ const { posts, currentPage, totalPages } = Astro.props;
 
 <style>
   .project-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
   .project-grid li {
-    width: calc(50% - 1rem);
+    width: 100%;
   }
   .project-grid li * {
     text-decoration: none;
     transition: 0.2s ease;
   }
-  .project-grid li:first-child {
-    width: 100%;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  .project-grid li:first-child .project-thumb {
-    width: 100%;
-  }
-  .project-grid li:first-child .title {
-    font-size: 2.369rem;
-  }
-  .project-grid li .project-thumb {
-    margin-bottom: 0.5rem;
-    border-radius: 12px;
-  }
   .project-grid li a {
     display: block;
   }
-  .title {
-    margin: 0;
-    color: rgb(var(--black));
-    line-height: 1;
-    font-size: 32px;
-    font-weight: 400;
+  .project-grid li .project-thumb {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    margin-bottom: 1.25rem;
+    border-radius: 12px;
   }
-  .date {
-    margin: 0;
-    color: rgb(var(--gray));
-    font-size: 14px;
-  }
-  .project-grid li a:hover .title,
-  .project-grid li a:hover .date {
-    color: rgb(var(--accent));
+  .project-grid li .project-thumb .loadimg__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .project-grid a:hover .project-thumb {
     box-shadow: var(--box-shadow);
   }
+  .thumb-wrapper {
+    position: relative;
+    display: block;
+  }
+  .substack-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.75);
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 400;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    z-index: 2;
+  }
   .title-details {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  .title {
+    margin: 0;
+    color: rgb(var(--black));
+    line-height: 1.1;
+    font-size: 28px;
+    font-weight: 400;
+    font-family: var(--font-ligema), serif;
+    text-transform: uppercase;
+  }
+  .date {
+    margin: 0;
+    color: rgb(var(--gray));
+    font-size: 12px;
+  }
+  .project-grid li a:hover .title,
+  .project-grid li a:hover .date {
+    color: rgb(var(--accent));
   }
 
   .pagination {
@@ -83,7 +99,7 @@ const { posts, currentPage, totalPages } = Astro.props;
     border-radius: 8px;
     text-decoration: none;
     color: rgb(var(--black));
-    font-size: 1rem;
+    font-size: 14px;
   }
   .pagination a {
     border: 1px solid rgb(var(--gray));
@@ -94,7 +110,7 @@ const { posts, currentPage, totalPages } = Astro.props;
   .pagination .current {
     background: rgb(var(--gray-light));
     color: #fff;
-    font-weight: 4ther00;
+    font-weight: 500;
     outline: 1px solid rgb(var(--gray-light));
     outline-offset: -2px;
   }
@@ -103,29 +119,23 @@ const { posts, currentPage, totalPages } = Astro.props;
     pointer-events: none;
   }
 
+  @media (max-width: 1024px) {
+    .project-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
   @media (max-width: 720px) {
     .project-grid {
-      gap: 0.5em;
-    }
-    .project-grid li {
-      width: 100%;
-      margin-top: 32px;
-    }
-    .project-grid li:first-child {
-      margin-bottom: 0;
-      text-align: left;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
     }
     .title {
-      font-size: 1.8rem;
-      font-family: var(--font-ligema), sans-serif;
-      font-weight: 400;
+      font-size: 28px;
     }
-    .title-details {
-      margin-top: 1rem;
-    }
-    .project-grid li:first-child .title {
-      font-size: 1.8rem;
-      font-weight: 400;
+  }
+  @media (max-width: 480px) {
+    .project-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
@@ -134,49 +144,26 @@ const { posts, currentPage, totalPages } = Astro.props;
   {
     posts.map((post) => (
       <li>
-        <a href={`/projects/${post.id}/`}>
+        <a href={`/blog/${post.id}/`}>
           {post.data.heroImage && (
-            <LoadableImage
-              class="project-thumb"
-              width={392}
-              height={360}
-              src={post.data.heroImage}
-              alt=""
-            />
+            <div class="thumb-wrapper">
+              <LoadableImage
+                class="project-thumb"
+                width={392}
+                height={360}
+                src={post.data.heroImage}
+                alt=""
+              />
+              {post.data.source && (
+                <span class="substack-badge">Substack</span>
+              )}
+            </div>
           )}
           <div class="title-details">
-            <div>
-              <h4 class="title">{post.data.title}</h4>
-              <p class="date">
-                <FormattedDate date={post.data.pubDate} />
-              </p>
-            </div>
-            <div>
-              <svg
-                width="34"
-                height="34"
-                viewBox="0 0 34 34"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M22.3435 20.2204L23.6188 11.7314L15.1298 10.4561"
-                  stroke="#CDD1D6"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M9.94563 21.833L23.4822 11.8325"
-                  stroke="#CDD1D6"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
+            <h4 class="title">{post.data.title}</h4>
+            <p class="date">
+              <FormattedDate date={post.data.pubDate} />
+            </p>
           </div>
         </a>
       </li>
@@ -188,7 +175,7 @@ const { posts, currentPage, totalPages } = Astro.props;
   {
     currentPage > 1 ? (
       <a
-        href={currentPage === 2 ? "/projects" : `/projects/page/${currentPage - 1}`}
+        href={currentPage === 2 ? "/blog" : `/blog/page/${currentPage - 1}`}
         class="prev"
       >
         ← Previous
@@ -202,13 +189,13 @@ const { posts, currentPage, totalPages } = Astro.props;
       page === currentPage ? (
         <span class="current">{page}</span>
       ) : (
-        <a href={page === 1 ? "/projects" : `/projects/page/${page}`}>{page}</a>
+        <a href={page === 1 ? "/blog" : `/blog/page/${page}`}>{page}</a>
       ),
     )
   }
   {
     currentPage < totalPages ? (
-      <a href={`/projects/page/${currentPage + 1}`} class="next"
+      <a href={`/blog/page/${currentPage + 1}`} class="next"
         >Next →</a
       >
     ) : (

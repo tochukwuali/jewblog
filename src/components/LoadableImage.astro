@@ -7,6 +7,8 @@ type Props = {
   width?: number;
   height?: number;
   sizes?: string;
+  maxHeight?: number;
+  maxWidth?: number;
   class?: string;
   loading?: "eager" | "lazy";
   decoding?: "sync" | "async" | "auto";
@@ -19,33 +21,37 @@ const {
   width,
   height,
   sizes,
+  maxHeight,
+  maxWidth,
   class: className,
   loading = "lazy",
   decoding = "async",
   spinner = false,
 } = Astro.props;
 
-const imgProps: Props = {
-  src,
-  alt,
-  ...(width !== undefined ? { width } : {}),
-  ...(height !== undefined ? { height } : {}),
-  ...(sizes ? { sizes } : {}),
-  loading,
-  decoding,
-  class: className,
-};
-
 const hasDims = typeof width === "number" && typeof height === "number";
 const hasSizes = typeof sizes === "string" && sizes.length > 0;
-const imgStyle = className?.includes("home-hero-img")
-  ? "max-height:588px;width:auto;object-fit:contain;"
-  : className?.includes("home-secondary-img")
-  ? "max-height:auto;width:auto;object-fit:contain;"
-  : undefined;
+
+// Build wrapper style from maxHeight / maxWidth props
+const wrapperStyleParts: string[] = [];
+if (typeof maxHeight === "number") {
+  wrapperStyleParts.push(`--img-max-h:${maxHeight}px`);
+}
+if (typeof maxWidth === "number") {
+  wrapperStyleParts.push(`max-width:${maxWidth}px`);
+}
+const wrapperStyle = wrapperStyleParts.length > 0 ? wrapperStyleParts.join(";") : undefined;
+
+// Build img style
+const imgStyle = "width:auto;object-fit:contain";
 ---
 
-<div class={`loadimg ${className ?? ""}`} data-loadimg data-spinner={spinner ? "true" : "false"}>
+<div
+  class={`loadimg ${className ?? ""}`}
+  data-loadimg
+  data-spinner={spinner ? "true" : "false"}
+  style={wrapperStyle}
+>
   <div class="loadimg__placeholder" aria-hidden="true">
     {spinner ? <div class="loadimg__spinner"></div> : null}
   </div>
@@ -100,6 +106,12 @@ const imgStyle = className?.includes("home-hero-img")
   }
 </div>
 
+<style>
+  .loadimg .loadimg__img {
+    max-height: var(--img-max-h, none);
+  }
+</style>
+
 <script is:inline>
   (() => {
     if (window.__loadimgInit) return;
@@ -149,4 +161,3 @@ const imgStyle = className?.includes("home-hero-img")
     observer.observe(document.documentElement, { childList: true, subtree: true });
   })();
 </script>
-

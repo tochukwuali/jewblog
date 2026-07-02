@@ -32,6 +32,7 @@ import logo from "../assets/jewlogo.svg"; // Adjust path if needed
       </div>
       <div class="nav-overlay-links">
         <HeaderLink href="/">Home</HeaderLink>
+        <HeaderLink href="/blog">Blog</HeaderLink>
         <HeaderLink href="/projects">Projects</HeaderLink>
         <HeaderLink href="/about">About</HeaderLink>
         <HeaderLink href="/contact">Contact</HeaderLink>
@@ -105,7 +106,6 @@ import logo from "../assets/jewlogo.svg"; // Adjust path if needed
   }
   nav a.active {
     text-decoration: none;
-    border-bottom-color: var(--accent);
   }
   .social-links,
   .social-links a {
@@ -187,7 +187,7 @@ import logo from "../assets/jewlogo.svg"; // Adjust path if needed
     }
     .nav-overlay-links a {
       padding: 1em;
-      font-size: 1.5em;
+      font-size: 1em;
       border-bottom: none;
       opacity: 0;
       transform: translateY(20px);
@@ -204,6 +204,9 @@ import logo from "../assets/jewlogo.svg"; // Adjust path if needed
     }
     .internal-links.active .nav-overlay-links a:nth-child(4) {
       animation-delay: 0.4s;
+    }
+    .internal-links.active .nav-overlay-links a:nth-child(5) {
+      animation-delay: 0.5s;
     }
     @keyframes slideInUp {
       from {
@@ -223,19 +226,59 @@ import logo from "../assets/jewlogo.svg"; // Adjust path if needed
     .menu-toggle {
       display: none;
     }
+    .internal-links {
+      position: static;
+      width: auto;
+      height: auto;
+      background: none;
+      z-index: auto;
+      opacity: 1 !important;
+      visibility: visible !important;
+      max-height: none !important;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    .internal-links[aria-hidden="true"] {
+      max-height: none !important;
+      opacity: 1 !important;
+    }
+    .nav-overlay-header {
+      display: none;
+    }
+    .nav-overlay-links {
+      flex-direction: row;
+      padding: 0;
+      gap: 0.25em;
+    }
+    .nav-overlay-links a {
+      padding: 1em 0.5em;
+      font-size: 1em;
+      border-bottom: 4px solid transparent;
+      opacity: 1;
+      transform: none;
+      animation: none;
+      color: var(--nav-link);
+    }
+    .nav-overlay-links a:hover {
+      color: var(--nav-link-active);
+    }
+    .nav-overlay-links a.active {
+      color: var(--nav-link-active);
+    }
   }
 
   @media (min-width: 1024px) {
     header {
-      width: 1440px;
-      max-width: calc(100% - 2em);
+      width: 100%;
+      max-width: 1240px;
     }
   }
 
   @media (min-width: 1578px) {
     header {
-      width: 1440px;
-      max-width: calc(100% - 2em);
+      width: 100%;
+      max-width: 1240px;
     }
   }
 </style>

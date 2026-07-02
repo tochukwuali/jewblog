@@ -1,47 +1,36 @@
 ---
-import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
-import ProjectList from "../../components/ProjectList.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
-
-const POSTS_PER_PAGE = 10;
-
-const allPosts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-
-const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
-const currentPage = 1;
-const posts = allPosts.slice(0, POSTS_PER_PAGE);
+import { SITE_TITLE } from "../../consts";
 ---
 
-<!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <style>
-      /* main {
-        max-width: 960px;
-        width: 100%;
-        box-sizing: border-box;"
-      } */
-      @media (max-width: 720px) {
-        main {
-          width: 100%;
-          /* max-width: fit-content; */
-        }
-      }
-    </style>
+    <BaseHead title={SITE_TITLE} description="My Projects" />
   </head>
   <body>
     <Header />
-    <main>
-      <section>
-        <ProjectList posts={posts} currentPage={currentPage} totalPages={totalPages} />
-      </section>
+    <main class="projects-main">
+      <h1 class="projects-title">My Projects</h1>
     </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  .projects-main {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 4em 1em;
+  }
+
+  .projects-title {
+    font-family: var(--font-ligema), serif;
+    font-size: 3rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
+  }
+</style>

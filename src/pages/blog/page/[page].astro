@@ -26,7 +26,7 @@ export async function getStaticPaths() {
   const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
   const pages = [];
 
-  // Page 1 is handled by /projects/index.astro, so start from page 2
+  // Page 1 is handled by /blog/index.astro, so start from page 2
   for (let page = 2; page <= totalPages; page++) {
     pages.push({ params: { page: String(page) } });
   }
@@ -40,6 +40,14 @@ export async function getStaticPaths() {
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
+      .blog-title {
+        font-family: var(--font-ligema), serif;
+        font-size: 80px;
+        font-weight: 400;
+        color: #ffffff;
+        margin-bottom: 1.5em;
+        text-align: left;
+      }
       main {
         width: 960px;
       }
@@ -47,12 +55,16 @@ export async function getStaticPaths() {
         main {
           width: 100%;
         }
+        .blog-title {
+          font-size: 48px;
+        }
       }
     </style>
   </head>
   <body>
     <Header />
     <main>
+      <h1 class="blog-title">SoME oF My WRITINgs</h1>
       <section>
         <ProjectList posts={posts} currentPage={currentPage} totalPages={totalPages} />
       </section>

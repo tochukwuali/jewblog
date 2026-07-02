@@ -59,6 +59,7 @@ import JewChilling2 from "../assets/jewchilling2.jpg";
             alt={"Jubilee"}
             loading="eager"
             spinner
+            maxHeight={588}
           />
         </div>
 
@@ -95,29 +96,29 @@ import JewChilling2 from "../assets/jewchilling2.jpg";
           <div class="hero-watch" style="margin-top: 1rem;">
             <Button rounded background="#fff" class="full-width long-btn">
               Watch my hello video
-               <svg
-              slot="iconAfter"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12.025 4.94189L17.0834 10.0002L12.025 15.0586"
-                stroke="#000"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-              <path
-                d="M2.91663 10H16.9416"
-                stroke="#000"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
+              <svg
+                slot="iconAfter"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.025 4.94189L17.0834 10.0002L12.025 15.0586"
+                  stroke="#000"
+                  stroke-width="1.5"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M2.91663 10H16.9416"
+                  stroke="#000"
+                  stroke-width="1.5"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
             </Button>
           </div>
         </div>
@@ -129,6 +130,7 @@ import JewChilling2 from "../assets/jewchilling2.jpg";
             class="home-secondary-img"
             src={JewChilling}
             alt={"Jubilee"}
+            maxHeight={532}
           />
         </div>
         <div class="secondary-home-text">
@@ -220,6 +222,38 @@ import JewChilling2 from "../assets/jewchilling2.jpg";
           </Button>
         </div>
       </section>
+
+      <section class="testimonials-section">
+        <h2 class="testimonials-heading font-ligema">
+          HeRE'S WHAT My CLIeNTS ArE SAyING
+        </h2>
+        <div class="testimonials-scroll">
+          <div class="testimonial-card">
+            <p class="testimonial-quote">
+              "Working with Tech Innovations has completely changed our business for the better. Jubilee, the creative writer I collaborated with, was incredibly responsive and always exceeded my expectations. Since implementing his solutions, I've seen a significant increase in efficiency and productivity. I wholeheartedly recommend his services!"
+            </p>
+            <p class="testimonial-author">Tayo Aina, Youtuber</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">
+              "An absolute professional from start to finish. The content delivered was on-brand, on-time, and exceeded every benchmark we set. Jubilee's ability to capture our voice was remarkable."
+            </p>
+            <p class="testimonial-author">Sarah Johnson, CEO, BrandCraft</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">
+              "I've worked with many writers, but none have matched the creativity and attention to detail that Jubilee brings. Every project has been a standout success. Truly a hidden gem in the industry."
+            </p>
+            <p class="testimonial-author">Michael Chen, Marketing Director</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">
+              "From the initial brief to the final delivery, the experience was seamless. Jubilee took our vague ideas and turned them into compelling narratives that resonated with our audience. Can't recommend enough."
+            </p>
+            <p class="testimonial-author">Amina Okafor, Founder, PulseMedia</p>
+          </div>
+        </div>
+      </section>
     </main>
     <Footer />
     <style>
@@ -281,18 +315,22 @@ import JewChilling2 from "../assets/jewchilling2.jpg";
       .jewchilling-img {
         max-width: 720px;
         margin: 4rem auto 0;
+        overflow: hidden;
+      }
+
+      .secondary-home-section .jewchilling-img {
+        max-height: 366px;
+        border-radius: 0 0 8px 8px;
+      }
+
+      .tertiary-home-section .jewchilling-img {
+        max-height: 366px;
+        border-radius: 0 0 8px 8px;
       }
 
       .home-secondary-img {
         width: 100%;
         height: auto;
-        object-fit: cover;
-      }
-
-      .tertiary-home-section .home-secondary-img .loadimg__img {
-        max-height: 320px !important;
-        width: auto;
-        object-fit: contain;
       }
 
       .secondary-home-section {
@@ -342,7 +380,79 @@ import JewChilling2 from "../assets/jewchilling2.jpg";
         color: rgb(var(--gray));
       }
 
+      .testimonials-section {
+        margin: 6rem auto;
+        max-width: 1100px;
+        overflow-x: hidden;
+      }
+
+      .testimonials-heading {
+        text-align: center;
+        font-size: 40px;
+        /* font-weight: 700; */
+        font-weight: 400;
+        margin-bottom: 2.5rem;
+        
+        /* text-transform: uppercase; */
+        color: rgb(var(--black));
+      }
+
+      .testimonials-scroll {
+        display: flex;
+        gap: 1.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 0.5rem;
+      }
+
+      .testimonials-scroll::-webkit-scrollbar {
+        display: none;
+      }
+
+      .testimonial-card {
+        flex: 0 0 340px;
+        scroll-snap-align: start;
+        background: rgb(var(--gray-light));
+        border-radius: 12px;
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid rgba(var(--gray), 0.15);
+      }
+
+      .testimonial-quote {
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--text);
+        margin: 0 0 1.5rem 0;
+        text-align: left;
+      }
+
+      .testimonial-author {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0;
+        text-align: left;
+        font-weight: 600;
+      }
+
+      @media (min-width: 728px) {
+        .testimonials-heading {
+          font-size: 36px;
+        }
+
+        .testimonial-card {
+          flex: 0 0 380px;
+        }
+      }
+
       @media (min-width: 1024px) {
+        main {
+          margin-top: 4rem;
+        }
         .hero-image {
           max-width: 680px;
         }
@@ -353,6 +463,8 @@ import JewChilling2 from "../assets/jewchilling2.jpg";
           gap: 2rem;
           max-width: 1024px;
           margin: 2em auto;
+          margin-left: 200px;
+          margin-top: -4rem;
         }
 
         .hero-image {
@@ -420,8 +532,11 @@ import JewChilling2 from "../assets/jewchilling2.jpg";
           width: auto !important;
           height: auto !important;
           max-width: 100% !important;
-          /* max-height: 532px !important; */
           object-fit: contain !important;
+        }
+
+        .secondary-home-section .home-secondary-img .loadimg__img {
+          max-height: 532px !important;
         }
 
         .secondary-home-section {
