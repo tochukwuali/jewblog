@@ -1,0 +1,37 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  widths?: number[];
+  loading?: "eager" | "lazy";
+}
+
+const CLOUDINARY_BASE = "https://res.cloudinary.com/tochukwu/image/upload";
+const VERSION = "v1783010490";
+const FOLDER = "jewbelee";
+
+const {
+  src,
+  alt,
+  class: className,
+  widths = [400, 640, 960, 1280],
+  loading = "lazy",
+} = Astro.props;
+
+const srcset = widths
+  .map((w) => `${CLOUDINARY_BASE}/w_${w}/${VERSION}/${FOLDER}/${src} ${w}w`)
+  .join(", ");
+
+const defaultSrc = `${CLOUDINARY_BASE}/w_640/${VERSION}/${FOLDER}/${src}`;
+---
+
+<img
+  src={defaultSrc}
+  srcset={srcset}
+  sizes="(max-width: 480px) 95vw, (max-width: 768px) 90vw, (max-width: 1024px) 45vw, 580px"
+  alt={alt}
+  class={className}
+  loading={loading}
+  decoding="async"
+/>
