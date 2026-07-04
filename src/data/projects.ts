@@ -44,6 +44,7 @@ export const projects: Project[] = [
     results: "9.6m views",
     whyChosen:
       "This is probably the most successful script I have written long form wise and it required heavy research and took almost two weeks to complete. I also wrote most of the popular videos on that channel.",
+      link: "https://www.youtube.com/watch?v=7jDei3xyC60"
   },
   {
     slug: "eminem-apologize",

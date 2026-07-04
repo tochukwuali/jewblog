@@ -372,7 +372,7 @@ svg {
 @media (min-width: 1024px) {
   main {
     width: 100%;
-    max-width: 1240px;
+    max-width: 1300px;
     margin: 0 auto;
   }
   .header1 {
@@ -394,7 +394,7 @@ svg {
 @media (min-width: 1578px) {
   main {
     width: 100%;
-    max-width: 1240px;
+    max-width: 1300px;
     margin: 0 auto;
   }
 

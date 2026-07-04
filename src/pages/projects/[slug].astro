@@ -13,272 +13,415 @@ export function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const project = projects.find((p) => p.slug === slug);
+const projectIndex = projects.findIndex((p) => p.slug === slug);
+const project = projects[projectIndex];
 
 if (!project) {
   return Astro.redirect("/projects");
 }
+
+const nextProject = projects[(projectIndex + 1) % projects.length];
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={`${project.title} | ${SITE_TITLE}`} description={project.title} />
+    <BaseHead
+      title={`${project.title} | ${SITE_TITLE}`}
+      description={project.title}
+    />
   </head>
   <body>
     <Header />
-    <main class="project-detail-main">
-      <a href="/projects" class="back-link">
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 18 18"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M11.5 3.5L5.5 9L11.5 14.5"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-        Back to Projects
-      </a>
+    <main class="pd-main">
+      <a href="/projects" class="pd-back">← Back</a>
 
-      <article class="project-article">
+      <!-- Hero + title overlay -->
+      <div class="pd-hero">
         <CloudinaryImage
-          class="project-hero-img"
+          class="pd-hero-img"
           src={project.image}
           alt={project.title}
           widths={[640, 960, 1280, 1920]}
         />
+        <div class="pd-hero-title-wrap">
+          <h1 class="pd-hero-title font-ligema">
+            {project.title.toUpperCase()}
+          </h1>
+        </div>
+      </div>
 
-        <div class="project-meta">
-          {project.tags.map((tag) => (
-            <span class="project-tag">{tag}</span>
-          ))}
+      <!-- TWO-COLUMN LAYOUT: Overview (left) | Metadata (right) -->
+      <div class="pd-two-col">
+        <div class="pd-overview">
+          <span class="pd-label">Overview</span>
+          <p class="pd-overview-text">
+            "Working with Tech Innovations has completely changed our business
+            for the better. Jubilee, the creative writer I collaborated with,
+            was incredibly responsive and always exceeded my expectations. Since
+            implementing his solutions, I've seen a significant increase in
+            efficiency and productivity. I wholeheartedly recommend his
+            services!"
+          </p>
+          <a
+            href={project.link || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="pd-visit-btn"
+          >
+            Watch Video
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path
+                d="M4.5 2.5L13.5 2.5M13.5 2.5L13.5 11.5M13.5 2.5L2.5 13.5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </a>
         </div>
 
-        <h1 class="project-detail-title font-ligema">{project.title.toUpperCase()}</h1>
+        <div class="pd-meta">
+          <div class="pd-meta-card">
+            <div class="pd-meta-year">2023</div>
+            <div class="pd-meta-detail">Year</div>
+          </div>
+          <div class="pd-meta-card">
+            <div class="pd-meta-year">Tayo Aina</div>
+            <div class="pd-meta-detail">Client</div>
+          </div>
+          <div class="pd-meta-card">
+            <div class="pd-meta-year">{project.role || "Script Writer"}</div>
+            <div class="pd-meta-detail">My Role</div>
+          </div>
+          <div class="pd-meta-card">
+            <div class="pd-meta-year">{project.tags[0] || "Youtube"}</div>
+            <div class="pd-meta-detail">Category</div>
+          </div>
+        </div>
+      </div>
 
-        {
-          project.role && (
-            <div class="project-detail-section">
-              <h2 class="section-heading">Role</h2>
-              <p class="section-text">{project.role}</p>
-            </div>
-          )
-        }
-
-        {
-          project.video && (
-            <div class="project-detail-section">
-              <h2 class="section-heading">Video</h2>
-              <p class="section-text">{project.video}</p>
-            </div>
-          )
-        }
-
-        {
-          project.contribution && project.contribution.length > 0 && (
-            <div class="project-detail-section">
-              <h2 class="section-heading">My Contribution</h2>
-              <ul class="contribution-list">
-                {project.contribution.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </div>
-          )
-        }
-
-        {
-          project.results && (
-            <div class="project-detail-section">
-              <h2 class="section-heading">Results</h2>
-              <p class="section-text results-text">{project.results}</p>
-            </div>
-          )
-        }
-
-        {
-          project.whyChosen && (
-            <div class="project-detail-section">
-              <h2 class="section-heading">Why I Chose This Sample</h2>
-              <p class="section-text">{project.whyChosen}</p>
-            </div>
-          )
-        }
-
-        {
-          project.link && (
-            <a href={project.link} target="_blank" rel="noopener noreferrer" class="view-link">
-              Watch Video
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+      <!-- Next project -->
+      <div class="pd-next-wrap">
+        <span class="pd-next-label font-ligema">
+          <p>NexT </p>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path
-                  d="M13.5 9L6.5 3.5V14.5L13.5 9Z"
+                  d="M4.5 2.5L13.5 2.5M13.5 2.5L13.5 11.5M13.5 2.5L2.5 13.5"
                   stroke="currentColor"
                   stroke-width="1.5"
                   stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                  stroke-linejoin="round"></path>
               </svg>
-            </a>
-          )
-        }
-      </article>
+        </span>
+        <a href={`/projects/${nextProject.slug}`} class="pd-next-card">
+          <CloudinaryImage
+            class="pd-next-img"
+            src={nextProject.image}
+            alt={nextProject.title}
+          />
+          <div class="pd-next-body">
+            <div class="pd-next-title-row">
+              <span class="pd-next-title font-ligema"
+                >{nextProject.title.toUpperCase()}</span
+              >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M4.5 2.5L13.5 2.5M13.5 2.5L13.5 11.5M13.5 2.5L2.5 13.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <div class="pd-next-tags">
+              {
+                nextProject.tags.map((tag) => (
+                  <span class="pd-next-tag">{tag}</span>
+                ))
+              }
+            </div>
+          </div>
+        </a>
+      </div>
     </main>
     <Footer />
   </body>
 </html>
 
-<style>
-  .project-detail-main {
-    width: 100%;
-    max-width: 860px;
+<style is:global>
+  .pd-main {
+    max-width: 1300px !important;
     margin: 0 auto;
-    padding: 4em 1em;
+    padding: 4em 1.5em;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
   }
 
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
+  .pd-back {
+    display: inline-block;
     font-size: 15px;
     color: var(--muted);
     text-decoration: none;
-    margin-bottom: 2rem;
-    transition: color 0.2s;
+    margin-bottom: 1.5rem;
   }
-
-  .back-link:hover {
+  .pd-back:hover {
     color: rgb(var(--black));
   }
 
-  .project-article {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .project-hero-img {
-    width: 100%;
+  /* Hero */
+  .pd-hero {
+    position: relative;
     border-radius: 16px;
-    display: block;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    width: 100%;
+  }
+  .pd-hero-img {
+    width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
+    display: block;
+  }
+  .pd-hero-title-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  }
+  .pd-hero-title {
+    font-size: 32px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.15;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
-  .project-meta {
+  /* === TWO COLUMN LAYOUT (desktop) === */
+  .pd-two-col {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 5rem;
+    width: 100%;
+  }
+  .pd-overview {
+    flex: 0 0 60%;
+    min-width: 0;
+  }
+  .pd-meta {
+    flex: 0 0 calc(40% - 3rem);
+  }
+
+  /* LEFT column: Overview */
+  .pd-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+  }
+  .pd-overview-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0 0 2rem 0;
+  }
+  .pd-visit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    border-radius: 999px;
+    background: rgb(var(--black));
+    color: rgb(var(--gray-light));
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .pd-visit-btn svg {
+    color: rgb(var(--gray-light));
+  }
+  .pd-visit-btn:hover {
+    opacity: 0.85;
+  }
+
+  [data-theme="dark"] .pd-visit-btn {
+    background: #ffffff;
+    color: #000000;
+  }
+  [data-theme="dark"] .pd-visit-btn:hover {
+    background: #e0e0e0;
+  }
+
+  /* RIGHT column: Metadata cards */
+  .pd-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .pd-meta-card {
+    background: var(--about-content-card, rgb(var(--gray-light)));
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .pd-meta-year {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+  .pd-meta-detail {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  /* Next section — pushed to the right via align-self */
+  .pd-next-wrap {
+    align-self: center !important;
+    display: flex;
+    /* flex-direction: column; */
+    align-items:center;
+    gap: 2.25rem;
+    max-width: 780px;
+    width: 100%;
+  }
+
+  .pd-next-label > svg {
+    width: 2.4rem;
+    height: auto;
+  }
+  .pd-next-label {
+    color: var(--muted);
+    font-size: 84px;
+    font-weight: 500;
+    /* text-transform: uppercase; */
+    letter-spacing: 1px;
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: baseline;
+  }
+  .pd-next-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .pd-next-card:hover {
+    transform: translateY(-3px);
+  }
+  .pd-next-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+    display: block;
+  }
+  .pd-next-body {
+    padding: 1rem 0 0;
+  }
+  .pd-next-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+    gap: 0.5rem;
+  }
+  .pd-next-title {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgb(var(--black));
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+  .pd-next-title-row svg {
+    flex-shrink: 0;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .pd-next-tags {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
   }
-
-  .project-tag {
-    font-size: 12px;
-    padding: 0.3rem 0.9rem;
+  .pd-next-tag {
+    font-size: 11px;
+    padding: 0.25rem 0.7rem;
     border-radius: 999px;
     background: rgb(var(--gray-light));
     color: var(--text);
   }
 
-  .project-detail-title {
-    font-size: 32px;
-    font-weight: 400;
-    color: rgb(var(--black));
-    line-height: 1.15;
-    margin: 0;
-    text-transform: uppercase;
+  /* === Large screens: remove side padding === */
+  @media (min-width: 1500px) {
+    .pd-main {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
-  .project-detail-section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .section-heading {
-    font-size: 16px;
-    font-weight: 600;
-    color: rgb(var(--black));
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .section-text {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text);
-    margin: 0;
-  }
-
-  .results-text {
-    font-size: 20px;
-    font-weight: 600;
-    color: rgb(var(--accent));
-  }
-
-  .contribution-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .contribution-list li {
-    font-size: 15px;
-    color: var(--text);
-    padding-left: 1.2rem;
-    position: relative;
-  }
-
-  .contribution-list li::before {
-    content: "–";
-    position: absolute;
-    left: 0;
-    color: var(--muted);
-  }
-
-  .view-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    padding: 0.75rem 1.5rem;
-    background: rgb(var(--gray-dark));
-    color: rgb(var(--gray-light));
-    text-decoration: none;
-    border-radius: 999px;
-    font-size: 15px;
-    font-weight: 500;
-    transition: background 0.2s;
-    align-self: flex-start;
-  }
-
-  .view-link:hover {
-    background: rgb(var(--black));
-  }
-
+  /* === MOBILE: stack to single column === */
   @media (max-width: 768px) {
-    .project-detail-title {
-      font-size: 24px;
-      letter-spacing: 2px;
+    .pd-main {
+      padding: 1.5em 1em 3em;
+    }
+    .pd-hero-title-wrap {
+      padding: 1.25rem;
+    }
+    .pd-hero-title {
+      font-size: 22px;
+    }
+    .pd-two-col {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .pd-meta {
+      flex: 0 0 auto;
+    }
+    .pd-next-wrap {
+      max-width: 100%;
+      align-self: stretch;
     }
 
-    .project-detail-main {
-      padding: 2em 1em;
+     .pd-next-label {
+    color: var(--muted);
+    font-size: 16px;
+    font-weight: 500;
+    /* text-transform: uppercase; */
+    letter-spacing: 1px;
+  }
+  }
+
+  /* Desktop: back link top-right */
+  @media (min-width: 769px) {
+    .pd-main {
+      position: relative;
+    }
+    .pd-back {
+      position: absolute;
+      top: 2em;
+      right: 1.5em;
+      margin-bottom: 0;
+    }
+    .pd-next-tag {
+      font-size: 14px;
+    }
+    .pd-next-title {
+      font-size: 40px;
     }
   }
 </style>

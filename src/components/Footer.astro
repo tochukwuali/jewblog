@@ -6,50 +6,56 @@ const today = new Date();
   <div class="cta-section">
     <div class="cta-text">
       <p class="font-ligema">LET'S WOrK TOgETHeR</p>
-       <svg
-              slot="iconAfter"
-              width="34"
-              height="34"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12.025 4.94189L17.0834 10.0002L12.025 15.0586"
-                stroke="#D7D7D7"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-              <path
-                d="M2.91663 10H16.9416"
-                stroke="#D7D7D7"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
+      <svg
+        slot="iconAfter"
+        width="34"
+        height="34"
+        viewBox="0 0 20 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12.025 4.94189L17.0834 10.0002L12.025 15.0586"
+          stroke="#D7D7D7"
+          stroke-width="1.5"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path
+          d="M2.91663 10H16.9416"
+          stroke="#D7D7D7"
+          stroke-width="1.5"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
     </div>
-    
-    <p class="cta-sub-section">I craft imaginative narratives and engaging scripts that captivate audiences and transport them to different worlds.</p>
+
+    <p class="cta-sub-section">
+      I craft imaginative narratives and engaging scripts that captivate
+      audiences and transport them to different worlds.
+    </p>
   </div>
-  <div class="social-links">
-    <a href="https://x.com/Jewbelee" target="_blank">
-      <!-- <span class="sr-only">Follow Astro on Mastodon</span> -->
-      <p>Twitter</p>
-    </a>
-    <a href="https://medium.com/@jubileedeh" target="_blank">
-      <!-- <span class="sr-only">Follow Astro on Twitter</span> -->
-      <p>Medium</p>
-    </a>
-    <a href="https://jubileedeh.substack.com/" target="_blank">
-      <!-- <span class="sr-only">Go to Astro's GitHub repo</span> -->
-      <p>Substack</p>
-    </a>
-  </div>
-  <div class="footer-copyright">
-    <p>&copy; jubileedeh, {today.getFullYear()}</p>
-    <p>jubileedeh@gmail.com</p>
+
+  <div class="footer-content">
+    <div class="social-links">
+      <a href="https://x.com/Jewbelee" target="_blank">
+        <!-- <span class="sr-only">Follow Astro on Mastodon</span> -->
+        <p>Twitter</p>
+      </a>
+      <a href="https://medium.com/@jubileedeh" target="_blank">
+        <!-- <span class="sr-only">Follow Astro on Twitter</span> -->
+        <p>Medium</p>
+      </a>
+      <a href="https://jubileedeh.substack.com/" target="_blank">
+        <!-- <span class="sr-only">Go to Astro's GitHub repo</span> -->
+        <p>Substack</p>
+      </a>
+    </div>
+    <div class="footer-copyright">
+      <p>&copy; jubileedeh, {today.getFullYear()}</p>
+      <p>jubileedeh@gmail.com</p>
+    </div>
   </div>
 </footer>
 <style>
@@ -113,18 +119,66 @@ const today = new Date();
     margin-top: 34px;
   }
 
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+  }
+
   @media (min-width: 1024px) {
     footer {
       width: 100% !important;
-      max-width: 1240px !important;
+      max-width: 1300px !important;
       margin: 0 auto !important;
+    }
+
+    .cta-text p {
+      font-size: 180px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .cta-text svg {
+      width: 130px;
+      height: auto;
+    }
+
+    .cta-text {
+      background: rgba(var(--gray-light), 0.9);
+      padding: 15px 50px;
+      width: 100%;
+      border-radius: 180px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .cta-sub-section {
+      font-size: 20px;
+    }
+
+    .social-links a {
+      font-size: 18px;
+    }
+    .footer-copyright {
+      font-size: 18px;
+      justify-content: start;
+      gap: 2em;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-top: 3rem;
     }
   }
 
-   @media (min-width: 1578px) {
+  @media (min-width: 1578px) {
     footer {
       width: 100% !important;
-      max-width: 1240px !important;
+      max-width: 1300px !important;
       margin: 0 auto !important;
     }
   }
