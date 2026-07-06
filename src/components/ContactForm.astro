@@ -43,14 +43,12 @@
     width: 100%;
     /* border: 2px dashed #00e5ff; */
     border-radius: 8px;
-    padding: 2rem;
+    padding: 2rem;ju
     box-sizing: border-box;
   }
 
   label {
-    font-size: 10px;
-    line-height: 16.2px;
-    letter-spacing: 0%;
+    font-size: 12px;
     color: rgba(82, 82, 82, 1);
   }
 
@@ -62,7 +60,7 @@
 
   .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 1.25rem;
   }
 
@@ -101,10 +99,11 @@
   }
 
   .submit-btn {
-    background: #f5f5f5;
-    color: #0d0d0d;
+    background: var(--nav-link-active);
+    color: var(--overlay-bg);
     border: none;
     border-radius: 50px;
+    margin-top: 1rem;
     padding: 0.9rem 2rem;
     font-family: var(--font-primary), sans-serif;
     font-size: 18px;
@@ -150,6 +149,10 @@
 
     .submit-btn {
       padding: 0.4rem 2rem;
+    }
+
+    label {
+      font-size: 11px;
     }
   }
 </style>

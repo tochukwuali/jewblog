@@ -101,6 +101,7 @@ export const projects: Project[] = [
     imageSrcset: cloudinarySrcset("livestream-1280.jpg"),
     category: "youtube",
     tags: ["Youtube", "Scriptwriter"],
+    link: "https://youtu.be/g9rEvITqN4E?si=D3j7hDP9RZU8j65w"
   },
   {
     slug: "fortnite",
@@ -109,5 +110,6 @@ export const projects: Project[] = [
     imageSrcset: cloudinarySrcset("fortnite-1280.jpg"),
     category: "youtube",
     tags: ["Youtube", "Scriptwriter"],
+    link: "https://youtu.be/MgsIZ3AvV1E?si=RiUCfbp_fXoWrpBv"
   },
 ];
